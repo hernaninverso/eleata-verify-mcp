@@ -114,16 +114,17 @@ async function callVerify(claim: string, evidence: string, mode: string): Promis
   }
 
   const text = await res.text();
+  // Status-specific messages BEFORE attempting JSON (a gateway may return HTML on 5xx).
+  if (res.status === 401 || res.status === 403) return "Authentication failed: the EVERIFY_API_KEY is missing, invalid, or for the wrong channel.";
+  if (res.status === 413) return "Input too large for the verifier (field/body size limit exceeded).";
+  if (res.status === 429) return "Rate limit reached (about 60 requests/min). Try again shortly.";
+  if (res.status === 503) return "The verifier is temporarily unavailable (kill-switch or cold model).";
   let data: any;
   try {
     data = JSON.parse(text);
   } catch {
     return `The verifier returned an unexpected (non-JSON) response (HTTP ${res.status}). It may be down or rate-limiting.`;
   }
-  if (res.status === 401 || res.status === 403) return "Authentication failed: the EVERIFY_API_KEY is missing, invalid, or for the wrong channel.";
-  if (res.status === 413) return "Input too large for the verifier (field/body size limit exceeded).";
-  if (res.status === 429) return "Rate limit reached (about 60 requests/min). Try again shortly.";
-  if (res.status === 503) return "The verifier is temporarily unavailable (kill-switch or cold model).";
   if (res.status < 200 || res.status >= 300) {
     const msg = data?.error?.message || data?.detail || data?.message || `HTTP ${res.status}`;
     return `Verification failed: ${String(msg).slice(0, 300)}`;

@@ -3,14 +3,14 @@
   "name": "io.github.hernaninverso/eleata-verify-mcp",
   "title": "eleata Claim Verifier",
   "description": "Grounding/hallucination guard: verify a claim against evidence (Supported/Refuted/NEE).",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": { "url": "https://github.com/hernaninverso/eleata-verify-mcp", "source": "github" },
   "packages": [
     {
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
       "identifier": "eleata-verify-mcp",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "transport": { "type": "stdio" },
       "environmentVariables": [
         { "name": "EVERIFY_API_KEY", "description": "API key for the eleata Claim Verifier (paid Bearer or RapidAPI key)", "isRequired": true, "isSecret": true }

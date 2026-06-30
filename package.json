@@ -1,7 +1,7 @@
 {
   "name": "eleata-verify-mcp",
   "mcpName": "io.github.hernaninverso/eleata-verify-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "MCP server for grounding / hallucination checking: verify a claim against evidence (Supported/Refuted/Not Enough Evidence) — for AI agents.",
   "type": "module",
   "bin": { "eleata-verify-mcp": "dist/index.js" },
