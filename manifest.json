@@ -1,0 +1,26 @@
+{
+  "manifest_version": "0.3",
+  "name": "eleata-verify-mcp",
+  "version": "0.1.1",
+  "description": "Grounding / hallucination guard: verify a claim against evidence (Supported/Refuted/NEE) for AI agents.",
+  "author": { "name": "eleata", "url": "https://eleata.io" },
+  "homepage": "https://eleata.io",
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/index.js"],
+      "env": { "EVERIFY_API_KEY": "${user_config.api_key}" }
+    }
+  },
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "eleata Claim Verifier API Key",
+      "description": "API key from https://eleata.io/checkout?p=verifypro",
+      "sensitive": true,
+      "required": true
+    }
+  }
+}
