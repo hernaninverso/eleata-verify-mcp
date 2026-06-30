@@ -1,0 +1,19 @@
+# https://smithery.ai/docs/config#smitheryyaml
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    required:
+      - everifyApiKey
+    properties:
+      everifyApiKey:
+        type: string
+        description: API key for the eleata Claim Verifier. Injected as EVERIFY_API_KEY.
+  commandFunction: |-
+    (config) => ({
+      command: 'npx',
+      args: ['-y', 'eleata-verify-mcp'],
+      env: { EVERIFY_API_KEY: config.everifyApiKey }
+    })
+  exampleConfig:
+    everifyApiKey: your_eleata_verify_api_key
